@@ -2,8 +2,10 @@
 {
     public class GetDiscountDto
     {
-        public int CategoryID { get; set; }
-        public int CategoryName { get; set; }
-        public bool CategoryStatus { get; set; }
+        public int DiscountID { get; set; }
+        public string DiscountTitle { get; set; }
+        public string DiscountDescription { get; set; }
+        public string Amount { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
