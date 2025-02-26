@@ -34,7 +34,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde eklendi.");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
             var value = _categoryService.TGetByID(id);
@@ -52,7 +52,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetAboutById")]
+        [HttpGet("GetAboutById/{id}")]
         public IActionResult GetCategory(int id)
         {
             var value = _categoryService.TGetByID(id);
