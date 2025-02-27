@@ -35,7 +35,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı şekilde eklendi.");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
@@ -54,7 +54,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı şekilde güncellendi.");
         }
-        [HttpGet("GetAboutById")]
+        [HttpGet("GetAboutById/{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);

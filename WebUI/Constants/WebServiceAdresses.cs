@@ -12,5 +12,8 @@ namespace WebUI.Constants
         public static readonly string productIdApi = "https://localhost:7034/api/Product/{id}";
         public static readonly string productGetByIdApi = "https://localhost:7034/api/Product/GetProductById/{id}";
         public static readonly string productGetWithCategoryApi = "https://localhost:7034/api/Product/ProductListWithCategory";
+
+        public const string aboutApi = "https://localhost:7034/api/About";
+        public const string aboutGetByIdApi = "https://localhost:7034/api/About/GetAboutById/{id}";
     }
 }
