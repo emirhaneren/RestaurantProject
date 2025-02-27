@@ -52,7 +52,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetAboutById/{id}")]
+        [HttpGet("GetCategoryById/{id}")]
         public IActionResult GetCategory(int id)
         {
             var value = _categoryService.TGetByID(id);

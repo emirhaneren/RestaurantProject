@@ -35,10 +35,11 @@ namespace WebServices.Controllers
                 Price = createProductDto.Price,
                 ProductName = createProductDto.ProductName,
                 ProductStatus = true,
+                CategoryID= createProductDto.CategoryID,
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetByID(id);
@@ -56,10 +57,11 @@ namespace WebServices.Controllers
                 Price = updateProductDto.Price,
                 ProductName = updateProductDto.ProductName,
                 ProductStatus = updateProductDto.ProductStatus,
+                CategoryID= updateProductDto.CategoryID,
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetProductById")]
+        [HttpGet("GetProductById/{id}")]
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetByID(id);

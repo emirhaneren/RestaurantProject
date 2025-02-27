@@ -1,4 +1,4 @@
-﻿namespace DtoLayer.ProductDto
+﻿namespace WebUI.Dtos.ProductDtos
 {
     public class GetProductDto
     {

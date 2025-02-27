@@ -1,6 +1,6 @@
-﻿namespace DtoLayer.ProductDto
+﻿namespace WebUI.Dtos.ProductDtos
 {
-    public class GetProductDto
+    public class UpdateProductDto
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
