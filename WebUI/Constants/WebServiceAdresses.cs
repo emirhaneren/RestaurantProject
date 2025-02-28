@@ -17,7 +17,10 @@ namespace WebUI.Constants
         public static readonly string aboutGetByIdApi = "https://localhost:7034/api/About/GetAboutById/{id}";
 
         public const string bookingApi = "https://localhost:7034/api/Booking";
-        public const string bookingIdApi = "https://localhost:7034/api/Booking/{id}";
-        public const string bookingGetByIdApi = "https://localhost:7034/api/Booking/GetBookingById/{id}";
+        public static readonly string bookingIdApi = "https://localhost:7034/api/Booking/{id}";
+        public static readonly string bookingGetByIdApi = "https://localhost:7034/api/Booking/GetBookingById/{id}";
+
+        public const string contactApi = "https://localhost:7034/api/Contact";
+        public static readonly string contactGetByIdApi = "https://localhost:7034/api/Contact/GetContactById/{id}";
     }
 }

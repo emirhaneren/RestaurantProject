@@ -35,7 +35,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {
             var value = _contactService.TGetByID(id);
@@ -55,7 +55,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetContactById")]
+        [HttpGet("GetContactById/{id}")]
         public IActionResult GetContact(int id)
         {
             var value = _contactService.TGetByID(id);
