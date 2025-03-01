@@ -26,5 +26,9 @@ namespace WebUI.Constants
         public const string discountApi = "https://localhost:7034/api/Discount";
         public static readonly string discountIdApi = "https://localhost:7034/api/Discount/{id}";
         public static readonly string discountGetByIdApi = "https://localhost:7034/api/Discount/GetDiscountById/{id}";
+
+        public const string featureApi = "https://localhost:7034/api/Feature";
+        public static readonly string featureIdApi = "https://localhost:7034/api/Feature/{id}";
+        public static readonly string featureGetByIdApi = "https://localhost:7034/api/Feature/GetFeatureById/{id}";
     }
 }

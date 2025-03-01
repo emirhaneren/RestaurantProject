@@ -37,7 +37,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteFeature(int id)
         {
             var value = _featureService.TGetByID(id);
@@ -59,7 +59,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetFeatureById")]
+        [HttpGet("GetFeatureById/{id}")]
         public IActionResult GetFeature(int id)
         {
             var value = _featureService.TGetByID(id);
