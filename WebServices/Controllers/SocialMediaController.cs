@@ -34,7 +34,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteSocialMedia(int id)
         {
             var value = _socialMediaService.TGetByID(id);
@@ -53,7 +53,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetSocialMediaById")]
+        [HttpGet("GetSocialMediaById/{id}")]
         public IActionResult GetSocialMedia(int id)
         {
             var value = _socialMediaService.TGetByID(id);
