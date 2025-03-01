@@ -4,9 +4,9 @@ namespace WebUI.Constants
 {
     public class WebServiceAdresses
     {
-        public const string categoryApi= "https://localhost:7034/api/Category";
-        public static readonly string categoryIdApi= "https://localhost:7034/api/Category/{id}";
-        public static readonly string categoryGetByIdApi= "https://localhost:7034/api/Category/GetCategoryById/{id}";
+        public const string categoryApi = "https://localhost:7034/api/Category";
+        public static readonly string categoryIdApi = "https://localhost:7034/api/Category/{id}";
+        public static readonly string categoryGetByIdApi = "https://localhost:7034/api/Category/GetCategoryById/{id}";
 
         public const string productApi = "https://localhost:7034/api/Product";
         public static readonly string productIdApi = "https://localhost:7034/api/Product/{id}";
@@ -22,5 +22,9 @@ namespace WebUI.Constants
 
         public const string contactApi = "https://localhost:7034/api/Contact";
         public static readonly string contactGetByIdApi = "https://localhost:7034/api/Contact/GetContactById/{id}";
+
+        public const string discountApi = "https://localhost:7034/api/Discount";
+        public static readonly string discountIdApi = "https://localhost:7034/api/Discount/{id}";
+        public static readonly string discountGetByIdApi = "https://localhost:7034/api/Discount/GetDiscountById/{id}";
     }
 }
