@@ -36,7 +36,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde oluşturuldu");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteTesimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);
@@ -57,7 +57,7 @@ namespace WebServices.Controllers
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
-        [HttpGet("GetTestimonialById")]
+        [HttpGet("GetTestimonialById/{id}")]
         public IActionResult GetTestimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);

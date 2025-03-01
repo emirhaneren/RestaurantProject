@@ -34,5 +34,9 @@ namespace WebUI.Constants
         public const string socialMediaApi = "https://localhost:7034/api/SocialMedia";
         public static readonly string socialMediaIdApi = "https://localhost:7034/api/SocialMedia/{id}";
         public static readonly string socialMediaGetByIdApi = "https://localhost:7034/api/SocialMedia/GetSocialMediaById/{id}";
+
+        public const string testimonialApi = "https://localhost:7034/api/Testimonial";
+        public static readonly string testimonialIdApi = "https://localhost:7034/api/Testimonial/{id}";
+        public static readonly string testimonialGetByIdApi = "https://localhost:7034/api/Testimonial/GetTestimonialById/{id}";
     }
 }
