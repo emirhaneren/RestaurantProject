@@ -15,7 +15,7 @@ namespace BusinessLayer.Concrete
 
         public int TActiveCategoryCount()
         {
-           return _categoryDal.ActiveCategoryCount();
+            return _categoryDal.ActiveCategoryCount();
         }
 
         public int TPassiveCategoryCount()

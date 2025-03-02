@@ -2,7 +2,6 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositories;
 using EntityLayer.Entities;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DataAccessLayer.EntityFramework
 {
