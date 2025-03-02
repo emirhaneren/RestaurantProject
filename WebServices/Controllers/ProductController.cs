@@ -35,7 +35,7 @@ namespace WebServices.Controllers
                 Price = createProductDto.Price,
                 ProductName = createProductDto.ProductName,
                 ProductStatus = true,
-                CategoryID= createProductDto.CategoryID,
+                CategoryID = createProductDto.CategoryID,
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
@@ -57,7 +57,7 @@ namespace WebServices.Controllers
                 Price = updateProductDto.Price,
                 ProductName = updateProductDto.ProductName,
                 ProductStatus = updateProductDto.ProductStatus,
-                CategoryID= updateProductDto.CategoryID,
+                CategoryID = updateProductDto.CategoryID,
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
@@ -82,6 +82,36 @@ namespace WebServices.Controllers
                 ProductStatus = y.ProductStatus,
             });
             return Ok(values.ToList());
+        }
+        [HttpGet("GetProductCount")]
+        public IActionResult GetProductCount()
+        {
+            return Ok(_productService.TProductCount());
+        }
+        [HttpGet("GetProductCountByDrink")]
+        public IActionResult GetProductCountByDrink()
+        {
+            return Ok(_productService.TProductCountByCategoryNameDrink());
+        }
+        [HttpGet("GetProductCountByHamburger")]
+        public IActionResult GetProductCountByHamburger()
+        {
+            return Ok(_productService.TProductCountByCategoryNameHamburger());
+        }
+        [HttpGet("GetProductPriceAvg")]
+        public IActionResult GetProductPriceAvg()
+        {
+            return Ok(_productService.TProductPriceAvg());
+        }
+        [HttpGet("GetProductByMinPrice")]
+        public IActionResult GetProductByMinPrice()
+        {
+            return Ok(_productService.TProductNameByMinPrice());
+        }
+        [HttpGet("GetProductByMaxPrice")]
+        public IActionResult GetProductByMaxPrice()
+        {
+            return Ok(_productService.TProductNameByMaxPrice());
         }
     }
 }
