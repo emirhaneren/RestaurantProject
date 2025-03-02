@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/WebUI/wwwroot/Ready-Bootstrap-Dashboard-master
+/WebUI/wwwroot/feane-1.0.0
