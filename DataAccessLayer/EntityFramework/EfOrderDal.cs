@@ -14,13 +14,13 @@ namespace DataAccessLayer.EntityFramework
         public int ActiveOrderCount()
         {
             using var context = new Context();
-            return context.Orders.Where(x=>x.Description== "Müşteri Masada").Count();
+            return context.Orders.Where(x => x.Description == "Musteri Masada").Count();
         }
 
         public decimal LastOrderPrice()
         {
             using var context = new Context();
-            return context.Orders.OrderByDescending(x=>x.OrderID).Take(1).Select(y=>y.TotalPrice).FirstOrDefault();
+            return context.Orders.OrderByDescending(x => x.OrderID).Take(1).Select(y => y.TotalPrice).FirstOrDefault();
         }
 
         public int TotalOrderCount()
