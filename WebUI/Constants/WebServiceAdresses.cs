@@ -40,5 +40,9 @@ namespace WebUI.Constants
         public static readonly string testimonialGetByIdApi = "https://localhost:7034/api/Testimonial/GetTestimonialById/{id}";
 
         public const string sliderApi = "https://localhost:7034/api/Slider";
+
+        public static readonly string basketPostApi = "https://localhost:7034/api/Basket";
+        public static readonly string basketApi = "https://localhost:7034/api/Basket/{id}";
+        public static readonly string basketGetByProductNameApi = "https://localhost:7034/api/Basket/BasketListWithProductName/{id}";
     }
 }
