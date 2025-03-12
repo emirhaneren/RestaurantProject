@@ -4,20 +4,30 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
     int count = 0;
 }
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <div class="content">
     <div class="container-fluid">
-        <h4 class="page-title">Rezervasyon İşlemleri</h4>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Rezervasyon Listesi</div>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-sub">
-                            Rezervasyon ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz :
-                        </div>
-                        <table class="table mt-3">
+        <script type="text/javascript">
+            $(document).ready(()=>{
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7034/SignalRHub").build();
+
+                $("#connstatus").text(connection.state);
+
+                connection.start().then(()=>{
+                    $("#connstatus").text(connection.state);
+                    setInterval(()=>{
+                        connection.invoke("GetBookingList");
+                    },2000);
+
+                }).catch((err)=>{  console.log(err);  });
+
+                connection.on("ReceiveAllBookingList",(value)=>{
+                    console.log(value);
+                    let tablehtml=`
+                            <table class=table mt-3>
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -30,23 +40,38 @@
                                     <th scope="col">Güncelle</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    count++;
-                                    <tr>
-                                        <td>@count</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.PersonCount</td>
-                                        <td>@item.Mail</td>
-                                        <td>Rezervasyon Durumu</td>
-                                        <td><a href="/Booking/DeleteBooking/@item.BookingID" class="btn btn-outline-danger">Sil</a></td>
-                                        <td><a href="/Booking/UpdateBooking/@item.BookingID" class="btn btn-outline-warning">Güncelle</a></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                            <tbody>`
+                    $.each(value,(index,item)=>{
+                        tablehtml+=`
+                        <tr>
+                            <td>${item.bookingID}</td>
+                            <td>${item.name}</td>
+                            <td>${item.phone}</td>
+                            <td>${item.personCount}</td>
+                            <td>${item.mail}</td>
+                            <td>${"Rezervasyon Alındı"}</td>
+                            <td><a href="/Booking/DeleteBooking/${item.bookingID}" class="btn btn-outline-danger">Sil</a></td>
+                            <td><a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-warning">Güncelle</a></td>
+                        </tr>`
+                        });
+                    tablehtml+="</tbody></table>";
+                    $("#bookinglist").html(tablehtml);
+                });
+            });
+        </script>
+        <h4 class="page-title">Rezervasyon İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Rezervasyon Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Rezervasyon ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz :
+                        </div>
+                        <div id="bookinglist">
+                        </div>
                         <a href="/Booking/CreateBooking/" class="btn btn-outline-primary">Yeni Rezervasyon Girişi</a>
                     </div>
                 </div>

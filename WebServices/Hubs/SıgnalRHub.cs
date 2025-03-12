@@ -10,14 +10,16 @@ namespace WebServices.Hubs
         private readonly IOrderService _orderService;
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly IMenuTableService _menuTableService;
+        private readonly IBookingService _bookingService;
 
-        public SıgnalRHub(IProductService productService, ICategoryService categoryService, IOrderService orderService, IMoneyCaseService moneyCaseService,IMenuTableService menuTableService)
+        public SıgnalRHub(IProductService productService, ICategoryService categoryService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _orderService = orderService;
             _moneyCaseService = moneyCaseService;
             _menuTableService = menuTableService;
+            _bookingService = bookingService;
         }
 
         public async Task SendCategoryCount()
@@ -94,6 +96,11 @@ namespace WebServices.Hubs
         {
             var value = _menuTableService.TMenuTableCount();
             await Clients.All.SendAsync("ReceiveTotalTableCount", value);
+        }
+        public async Task GetBookingList()
+        {
+            var values = _bookingService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveAllBookingList", values);
         }
     }
 }
