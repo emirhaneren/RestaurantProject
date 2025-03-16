@@ -112,5 +112,10 @@ namespace WebServices.Hubs
             var notifications = _notificationService.TGetAllNotificationByStatusFalse();
             await Clients.All.SendAsync("ReceiveNotificationListByFalse", notifications);
         }
+        public async Task GetMenuTableList()
+        {
+            var values = _menuTableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveMenuTableStatus", values);
+        }
     }
 }

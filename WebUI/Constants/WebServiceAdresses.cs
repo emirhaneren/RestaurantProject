@@ -45,13 +45,15 @@ namespace WebUI.Constants
         public static readonly string basketApi = "https://localhost:7034/api/Basket/{id}";
         public static readonly string basketGetByProductNameApi = "https://localhost:7034/api/Basket/BasketListWithProductName/{id}";
 
-        public static readonly string notificationApi= "https://localhost:7034/api/Notification/NotificationList";
-        public static readonly string notificationCreateApi= "https://localhost:7034/api/Notification/CreateNotification";
-        public static readonly string notificationDeleteApi= "https://localhost:7034/api/Notification/DeleteNotification/{id}";
-        public static readonly string notificationGetApi= "https://localhost:7034/api/Notification/GetNotification/{id}";
-        public static readonly string notificationUpdateApi= "https://localhost:7034/api/Notification/UpdateNotification/{id}";
+        public static readonly string notificationApi = "https://localhost:7034/api/Notification/NotificationList";
+        public static readonly string notificationCreateApi = "https://localhost:7034/api/Notification/CreateNotification";
+        public static readonly string notificationDeleteApi = "https://localhost:7034/api/Notification/DeleteNotification/{id}";
+        public static readonly string notificationGetApi = "https://localhost:7034/api/Notification/GetNotification/{id}";
+        public static readonly string notificationUpdateApi = "https://localhost:7034/api/Notification/UpdateNotification/{id}";
         public static readonly string notificationUpdateStatusApi = "https://localhost:7034/api/Notification/UpdateNotificationStatus/{id}";
 
+        public static readonly string menuTableApi = "https://localhost:7034/api/MenuTable";
+        public static readonly string menuTableIdApi = "https://localhost:7034/api/MenuTable/{id}";
 
     }
 }
