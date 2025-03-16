@@ -11,8 +11,9 @@ namespace WebServices.Hubs
         private readonly IMoneyCaseService _moneyCaseService;
         private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
+        private readonly INotificationService _notificationService;
 
-        public SıgnalRHub(IProductService productService, ICategoryService categoryService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService)
+        public SıgnalRHub(IProductService productService, ICategoryService categoryService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
             _productService = productService;
             _categoryService = categoryService;
@@ -20,6 +21,7 @@ namespace WebServices.Hubs
             _moneyCaseService = moneyCaseService;
             _menuTableService = menuTableService;
             _bookingService = bookingService;
+            _notificationService = notificationService;
         }
 
         public async Task SendCategoryCount()
@@ -101,6 +103,14 @@ namespace WebServices.Hubs
         {
             var values = _bookingService.TGetListAll();
             await Clients.All.SendAsync("ReceiveAllBookingList", values);
+        }
+        public async Task GetNotificationCountByStatusFalse()
+        {
+            var values = _notificationService.TNotificationCountByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationCountByFalse", values);
+
+            var notifications = _notificationService.TGetAllNotificationByStatusFalse();
+            await Clients.All.SendAsync("ReceiveNotificationListByFalse", notifications);
         }
     }
 }
