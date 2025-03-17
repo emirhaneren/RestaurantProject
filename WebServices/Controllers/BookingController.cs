@@ -33,6 +33,7 @@ namespace WebServices.Controllers
                 Name = createBookingDto.Name,
                 PersonCount = createBookingDto.PersonCount,
                 Phone = createBookingDto.Phone,
+                Description= createBookingDto.Description,
             });
             return Ok("Başarılı bir şekilde eklendi.");
         }
@@ -54,6 +55,7 @@ namespace WebServices.Controllers
                 BookingID = updateBookingDto.BookingID,
                 PersonCount = updateBookingDto.PersonCount,
                 Phone = updateBookingDto.Phone,
+                Description = updateBookingDto.Description,
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
@@ -62,6 +64,18 @@ namespace WebServices.Controllers
         {
             var value = _bookingService.TGetByID(id);
             return Ok(value);
+        }
+        [HttpGet("BookingStatusApprove/{id}")]
+        public IActionResult BookingStatusApprove(int id)
+        {
+            _bookingService.TBookingStatusApproved(id);
+            return Ok("Başarılı bir şekilde onaylandı");
+        }
+        [HttpGet("BookingStatusCancel/{id}")]
+        public IActionResult BookingStatusCancel(int id)
+        {
+            _bookingService.TBookingStatusCancelled(id);
+            return Ok("Başarılı bir şekilde iptal edildi");
         }
     }
 }

@@ -35,6 +35,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
         {
+            createBookingDto.Description = "Rezervasyon Alındı";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createBookingDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, GeneralConstants.appJson);
@@ -80,6 +81,18 @@ namespace WebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+        public async Task<IActionResult> UpdateBookingStatusApproved(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.bookingApproveApi, id));
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> UpdateBookingStatusCanceled(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.bookingCancelApi,id));
+            return RedirectToAction("Index");
         }
     }
 }
