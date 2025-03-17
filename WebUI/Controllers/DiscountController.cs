@@ -81,5 +81,11 @@ namespace WebUI.Controllers
             }
             return View();
         }
+        public async Task<IActionResult> ChangeStatus(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.discountChangeStatusApi, id));
+            return RedirectToAction("Index");
+        }
     }
 }

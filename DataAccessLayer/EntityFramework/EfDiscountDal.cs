@@ -10,5 +10,21 @@ namespace DataAccessLayer.EntityFramework
         public EfDiscountDal(Context context) : base(context)
         {
         }
+
+        public void ChangeStatus(int id)
+        {
+            var context = new Context();
+            var discount = context.Discounts.Find(id);
+            if(discount.Status)
+            {
+                discount.Status = false;
+            }
+            else
+            {
+                discount.Status = true;
+            }
+            context.Update(discount);
+            context.SaveChanges();
+        }
     }
 }

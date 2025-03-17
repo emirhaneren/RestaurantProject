@@ -32,6 +32,7 @@ namespace WebServices.Controllers
                 DiscountDescription = createDiscountDto.DiscountDescription,
                 DiscountTitle = createDiscountDto.DiscountTitle,
                 ImageUrl = createDiscountDto.ImageUrl,
+                Status = false
             });
             return Ok("Başarılı bir şekilde eklendi");
         }
@@ -52,6 +53,7 @@ namespace WebServices.Controllers
                 DiscountDescription = updateDiscountDto.DiscountDescription,
                 DiscountTitle = updateDiscountDto.DiscountTitle,
                 ImageUrl = updateDiscountDto.ImageUrl,
+                Status = updateDiscountDto.Status
             });
             return Ok("Başarılı bir şekilde güncellendi");
         }
@@ -60,6 +62,12 @@ namespace WebServices.Controllers
         {
             var value = _discountService.TGetByID(id);
             return Ok(value);
+        }
+        [HttpGet("ChangeStatus/{id}")]
+        public IActionResult ChangeStatus(int id)
+        {
+            _discountService.TChangeStatus(id);
+            return Ok("Başarılı bir şekilde güncellendi");
         }
     }
 }

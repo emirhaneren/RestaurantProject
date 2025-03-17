@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
 }
 <div class="content">
     <div class="container-fluid">
@@ -23,6 +24,7 @@
                                     <th scope="col">Ürün</th>
                                     <th scope="col">İndirim Oranı</th>
                                     <th scope="col">Durum</th>
+                                    <th scope="col">Durumu Değiştir</th>
                                     <th scope="col">Sil</th>
                                     <th scope="col">Güncelle</th>
                                 </tr>
@@ -30,11 +32,20 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    count++;
                                     <tr>
-                                        <td>@item.DiscountID</td>
+                                        <th>@count</th>
                                         <td>@item.DiscountTitle</td>
                                         <td>@item.Amount</td>
-                                        <td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-success">Durum Değiştir</a></td>
+                                        @if (item.Status == true)
+                                        {
+                                            <td>Aktif</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Pasif</td>
+                                        }
+                                        <td><a href="/Discount/ChangeStatus/@item.DiscountID" class="btn btn-outline-success">Durum Değiştir</a></td>
                                         <td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger">Sil</a></td>
                                         <td><a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-warning">Güncelle</a></td>
                                     </tr>
