@@ -5,5 +5,6 @@ namespace DataAccessLayer.Abstract
     public interface IDiscountDal : IGenericDal<Discount>
     {
         void ChangeStatus(int id);
+        List<Discount> GetActiveDiscounts();
     }
 }

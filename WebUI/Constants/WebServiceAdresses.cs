@@ -29,6 +29,7 @@ namespace WebUI.Constants
         public static readonly string discountIdApi = "https://localhost:7034/api/Discount/{id}";
         public static readonly string discountGetByIdApi = "https://localhost:7034/api/Discount/GetDiscountById/{id}";
         public static readonly string discountChangeStatusApi = "https://localhost:7034/api/Discount/ChangeStatus/{id}";
+        public static readonly string discountListByActiveApi = "https://localhost:7034/api/Discount/GetActiveDiscounts";
 
         public const string socialMediaApi = "https://localhost:7034/api/SocialMedia";
         public static readonly string socialMediaIdApi = "https://localhost:7034/api/SocialMedia/{id}";

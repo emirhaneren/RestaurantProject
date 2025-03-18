@@ -69,5 +69,11 @@ namespace WebServices.Controllers
             _discountService.TChangeStatus(id);
             return Ok("Başarılı bir şekilde güncellendi");
         }
+        [HttpGet("GetActiveDiscounts")]
+        public IActionResult GetActiveDiscounts()
+        {
+            var value = _mapper.Map<List<ResultDiscountDto>>(_discountService.TGetActiveDiscounts());
+            return Ok(value);
+        }
     }
 }

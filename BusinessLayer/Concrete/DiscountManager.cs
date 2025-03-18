@@ -27,6 +27,11 @@ namespace BusinessLayer.Concrete
             _discountDal.Delete(entity);
         }
 
+        public List<Discount> TGetActiveDiscounts()
+        {
+            return _discountDal.GetActiveDiscounts();
+        }
+
         public Discount TGetByID(int id)
         {
             return _discountDal.GetByID(id);

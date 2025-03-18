@@ -26,5 +26,11 @@ namespace DataAccessLayer.EntityFramework
             context.Update(discount);
             context.SaveChanges();
         }
+
+        public List<Discount> GetActiveDiscounts()
+        {
+            var context = new Context();
+            return context.Discounts.Where(x => x.Status == true).ToList();
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace WebUI.ViewComponents.UILayoutComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMsg = await client.GetAsync(WebServiceAdresses.discountApi);
+            var responseMsg = await client.GetAsync(WebServiceAdresses.discountListByActiveApi);
             if (responseMsg.IsSuccessStatusCode)
             {
                 var jsonData = await responseMsg.Content.ReadAsStringAsync();
