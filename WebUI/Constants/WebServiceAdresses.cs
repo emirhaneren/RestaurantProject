@@ -30,10 +30,6 @@ namespace WebUI.Constants
         public static readonly string discountGetByIdApi = "https://localhost:7034/api/Discount/GetDiscountById/{id}";
         public static readonly string discountChangeStatusApi = "https://localhost:7034/api/Discount/ChangeStatus/{id}";
 
-        public const string featureApi = "https://localhost:7034/api/Feature";
-        public static readonly string featureIdApi = "https://localhost:7034/api/Feature/{id}";
-        public static readonly string featureGetByIdApi = "https://localhost:7034/api/Feature/GetFeatureById/{id}";
-
         public const string socialMediaApi = "https://localhost:7034/api/SocialMedia";
         public static readonly string socialMediaIdApi = "https://localhost:7034/api/SocialMedia/{id}";
         public static readonly string socialMediaGetByIdApi = "https://localhost:7034/api/SocialMedia/GetSocialMediaById/{id}";
@@ -43,6 +39,8 @@ namespace WebUI.Constants
         public static readonly string testimonialGetByIdApi = "https://localhost:7034/api/Testimonial/GetTestimonialById/{id}";
 
         public const string sliderApi = "https://localhost:7034/api/Slider";
+        public static readonly string sliderIdApi = "https://localhost:7034/api/Slider/{id}";
+        public static readonly string sliderGetByIdApi = "https://localhost:7034/api/Slider/GetSliderById/{id}";
 
         public static readonly string basketPostApi = "https://localhost:7034/api/Basket";
         public static readonly string basketApi = "https://localhost:7034/api/Basket/{id}";
