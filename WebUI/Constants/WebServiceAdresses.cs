@@ -57,6 +57,9 @@ namespace WebUI.Constants
         public static readonly string menuTableApi = "https://localhost:7034/api/MenuTable";
         public static readonly string menuTableIdApi = "https://localhost:7034/api/MenuTable/{id}";
 
+        public static readonly string messageApi= "https://localhost:7034/api/Message";
+        public static readonly string messageIdApi= "https://localhost:7034/api/Message/{id}";
+
     }
 }
 
