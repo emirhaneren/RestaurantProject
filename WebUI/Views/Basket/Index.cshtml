@@ -5,6 +5,7 @@
     decimal basketTotalPrice = 0;
     decimal basketTotalPriceWithKDV = 0;
     decimal basketTotalPriceWithoutKDV = 0;
+    decimal totalPriceWithCount = 0;
 }
 <!DOCTYPE html>
 <html>
@@ -41,19 +42,22 @@
                             <th>Sil</th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model)
+                    @foreach (var group in Model.GroupBy(x=>x.ProductName))
                     {
+                        var item = group.First();
+                        var itemCount = group.Count();
                         basketTotalPrice = Model.Sum(x => x.ProductPrice);
                         basketTotalPriceWithKDV = (basketTotalPrice / 100) * 10;
                         basketTotalPriceWithoutKDV = basketTotalPrice - basketTotalPriceWithKDV;
+                        totalPriceWithCount = item.ProductPrice * itemCount;
                         count++;
                         <tbody class="align-middle">
                             <tr>
                                 <td class="align-midddle">@count</td>
                                 <td class="align-midddle">@item.ProductName</td>
-                                <td class="align-midddle">@item.ProductCount</td>
+                                <td class="align-midddle">@itemCount</td>
                                 <td class="align-midddle">@item.ProductPrice</td>
-                                <td class="align-midddle">@item.TotalPrice</td>
+                                <td class="align-midddle">@totalPriceWithCount</td>
                                 <td class="align-midddle btn-delete"><a class="btn btn-sw btn-danger" href="/Basket/DeleteBasket/@item.BasketID"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>
