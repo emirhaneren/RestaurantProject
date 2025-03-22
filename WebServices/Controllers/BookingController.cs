@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DtoLayer.BookingDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -12,10 +13,12 @@ namespace WebServices.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
-        public BookingController(IBookingService bookingService, IMapper mapper)
+        private readonly IValidator<CreateBookingDto> _validator;
+        public BookingController(IBookingService bookingService, IMapper mapper, IValidator<CreateBookingDto> validator)
         {
             _bookingService = bookingService;
             _mapper = mapper;
+            _validator = validator;
         }
         [HttpGet]
         public IActionResult BookingList()
@@ -26,6 +29,11 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
+            var validationResult =_validator.Validate(createBookingDto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
             var value = _mapper.Map<Booking>(createBookingDto);
             _bookingService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi.");

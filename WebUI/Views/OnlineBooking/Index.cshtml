@@ -24,12 +24,15 @@
                         <form method="post">
                             <div>
                                 <input type="text" class="form-control" placeholder="Adınız Soyadınız" asp-for=Name />
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div>
                                 <input type="tel" class="form-control" placeholder="İletişim Numaranız" asp-for="Phone" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
                             <div>
                                 <input type="email" class="form-control" placeholder="e-Mail Adresiniz" asp-for="Mail" />
+                                <span asp-validation-for="Mail" class="text-danger"></span>
                             </div>
                             <div>
                                 <select class="form-control nice-select wide" asp-for="PersonCount">
@@ -55,9 +58,11 @@
                                         6++
                                     </option>
                                 </select>
+                                <span asp-validation-for="PersonCount" class="text-danger"></span>
                             </div>
                             <div>
                                 <input type="date" class="form-control" asp-for="Date">
+                                <span asp-validation-for="Date" class="text-danger"></span>
                             </div>
                             <div class="btn_box">
                                 <button>
