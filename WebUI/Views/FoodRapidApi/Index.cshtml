@@ -1,0 +1,58 @@
+﻿@model List<WebUI.Dtos.RapidApiDtos.ResultTastyApi>
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadPartialComponent")
+
+<body class="sub_page">
+
+    @await Component.InvokeAsync("_UILayoutMenuNavbarPartialComponent")
+    <br />
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Default/Index/">Ana Sayfa </a>
+                    <span class="breadcrumb-item active">Tarifler</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            @foreach (var item in Model)
+            {
+                <div class="card" style="width: 18rem; margin-left:45px; margin-top:30px;">
+                    <img src="@item.thumbnail_url" class="card-img-top" alt="..." style="width:284px;height:145px; margin:1px;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.name</h5>
+                        @if (item.total_time_minutes == 0)
+                        {
+                            <p class="card-text">Hazırlama Süresi (dk) : 10</p>
+                        }
+                        else
+                        {
+                            <p class="card-text">Hazırlama Süresi (dk) : @item.total_time_minutes</p>
+                        }
+                        <a href="@item.original_video_url" target="_blank" class="btn btn-warning">Tarifi İzle</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <br />
+    <br />
+
+    @await Component.InvokeAsync("_UILayoutFooterPartialComponent")
+
+    @await Component.InvokeAsync("_UILayoutScriptPartialComponent")
+</body>
+
+</html>
+
