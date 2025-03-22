@@ -30,7 +30,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@item.Location</td>
+                                        <td>@item.Location.Substring(0,20) ....</td>
                                         <td>@item.PhoneNumber</td>
                                         <td>@item.Mail</td>
                                         <td>@item.FooterDescription</td>

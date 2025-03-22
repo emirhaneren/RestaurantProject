@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Text;
 using WebUI.Constants;
+using WebUI.Dtos.ContactDtos;
 using WebUI.Dtos.MessageDtos;
 
 namespace WebUI.Controllers
@@ -36,7 +38,7 @@ namespace WebUI.Controllers
             var responseMsg = await client.PostAsync(WebServiceAdresses.messageApi, stringContent);
             if (responseMsg.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Default");
             }
             return View();
         }

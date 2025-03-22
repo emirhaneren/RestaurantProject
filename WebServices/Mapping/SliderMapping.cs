@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DtoLayer.SliderDto;
+using EntityLayer.Entities;
 
 namespace WebServices.Mapping
 {
@@ -6,9 +8,9 @@ namespace WebServices.Mapping
     {
         public SliderMapping()
         {
-            CreateMap<EntityLayer.Entities.Slider, DtoLayer.SliderDto.ResultSliderDto>().ReverseMap();
-            CreateMap<EntityLayer.Entities.Slider, DtoLayer.SliderDto.CreateSliderDto>().ReverseMap();
-            CreateMap<EntityLayer.Entities.Slider, DtoLayer.SliderDto.UpdateSliderDto>().ReverseMap();
+            CreateMap<Slider,ResultSliderDto>().ReverseMap();
+            CreateMap<Slider, CreateSliderDto>().ReverseMap();
+            CreateMap<Slider, UpdateSliderDto>().ReverseMap();
         }
     }
 }
