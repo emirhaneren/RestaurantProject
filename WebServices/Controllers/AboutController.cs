@@ -27,12 +27,8 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            _aboutService.TAdd(new About()
-            {
-                Title = createAboutDto.Title,
-                Description = createAboutDto.Description,
-                ImageUrl = createAboutDto.ImageUrl,
-            });
+            var value =_mapper.Map<About>(createAboutDto);
+            _aboutService.TAdd(value);
             return Ok("Başarılı şekilde eklendi.");
         }
         [HttpDelete("{id}")]
@@ -45,20 +41,15 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            _aboutService.TUpdate(new About()
-            {
-                AboutID = updateAboutDto.AboutID,
-                Title = updateAboutDto.Title,
-                Description = updateAboutDto.Description,
-                ImageUrl = updateAboutDto.ImageUrl
-            });
+            var value = _mapper.Map<About>(updateAboutDto);
+            _aboutService.TUpdate(value);
             return Ok("Başarılı şekilde güncellendi.");
         }
         [HttpGet("GetAboutById/{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetAboutDto>(value));
         }
     }
 }

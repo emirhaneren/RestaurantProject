@@ -26,12 +26,8 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateSocialMedia(CreateSocialMediaDto socialMediaDto)
         {
-            _socialMediaService.TAdd(new SocialMedia()
-            {
-                Title = socialMediaDto.Title,
-                Icon = socialMediaDto.Icon,
-                Url = socialMediaDto.Url,
-            });
+            var value = _mapper.Map<SocialMedia>(socialMediaDto);
+            _socialMediaService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
         }
         [HttpDelete("{id}")]
@@ -44,20 +40,14 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateSocialMedia(UpdateSocialMediaDto socialMediaDto)
         {
-            _socialMediaService.TUpdate(new SocialMedia()
-            {
-                Title = socialMediaDto.Title,
-                Icon = socialMediaDto.Icon,
-                Url = socialMediaDto.Url,
-                SocialMediaID = socialMediaDto.SocialMediaID,
-            });
+            var value = _mapper.Map<SocialMedia>(socialMediaDto);
+            _socialMediaService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");
         }
         [HttpGet("GetSocialMediaById/{id}")]
         public IActionResult GetSocialMedia(int id)
         {
-            var value = _socialMediaService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetSocialMediaDto>(_socialMediaService.TGetByID(id)));
         }
     }
 }

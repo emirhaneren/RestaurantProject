@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.MenuTableDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace WebServices.Controllers
     public class MenuTableController : ControllerBase
     {
         private readonly IMenuTableService _menuTableService;
+        private readonly IMapper _mapper;
 
-        public MenuTableController(IMenuTableService menuTableService)
+        public MenuTableController(IMenuTableService menuTableService, IMapper mapper)
         {
             _menuTableService = menuTableService;
+            _mapper = mapper;
         }
         [HttpGet("MenuTableCount")]
         public IActionResult MenuTableCount()
@@ -23,17 +26,15 @@ namespace WebServices.Controllers
         [HttpGet]
         public IActionResult MenuTableList()
         {
-            return Ok(_menuTableService.TGetListAll());
+            var values =_mapper.Map<List<ResultMenuTableDto>>(_menuTableService.TGetListAll());
+            return Ok(values);
         }
         [HttpPost]
         public IActionResult CreateMenuTable(CreateMenuTableDto createMenuTableDto)
         {
-            MenuTable menuTable = new MenuTable
-            {
-                Name = createMenuTableDto.Name,
-                Status = createMenuTableDto.Status
-            };
-            _menuTableService.TAdd(menuTable);
+            createMenuTableDto.Status = false;
+            var value = _mapper.Map<MenuTable>(createMenuTableDto);
+            _menuTableService.TAdd(value);
             return Ok("Masa Eklendi");
         }
         [HttpDelete("{id}")]
@@ -46,19 +47,14 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateMenuTable(UpdateMenuTableDto updateMenuTableDto)
         {
-            MenuTable menuTable = new MenuTable
-            {
-                MenuTableID = updateMenuTableDto.MenuTableID,
-                Name = updateMenuTableDto.Name,
-                Status = updateMenuTableDto.Status
-            };
-            _menuTableService.TUpdate(menuTable);
+            var value = _mapper.Map<MenuTable>(updateMenuTableDto);
+            _menuTableService.TUpdate(value);
             return Ok("Masa Güncellendi");
         }
         [HttpGet("{id}")]
         public IActionResult GetMenuTable(int id)
         {
-            return Ok(_menuTableService.TGetByID(id));
+            return Ok(_mapper.Map<GetMenuTableDto>(_menuTableService.TGetByID(id)));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BusinessLayer.Abstract;
+﻿using AutoMapper;
+using BusinessLayer.Abstract;
 using DtoLayer.NotificationDto;
 using EntityLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,39 +11,36 @@ namespace WebServices.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationService _notificationService;
+        private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService, IMapper mapper)
         {
             _notificationService = notificationService;
+            _mapper = mapper;
         }
 
         [HttpGet("NotificationList")]
         public IActionResult NotificationList()
         {
-            return Ok(_notificationService.TGetListAll());
+            return Ok(_mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetListAll()));
         }
         [HttpGet("NotificationCountByStatusFalse")]
         public IActionResult NotificationCountByStatusFalse()
         {
-            return Ok(_notificationService.TNotificationCountByStatusFalse());
+            return Ok(_mapper.Map<List<ResultNotificationDto>>(_notificationService.TNotificationCountByStatusFalse()));
         }
         [HttpGet("NotificationListByStatusFalse")]
         public IActionResult NotificationListByStatusFalse()
         {
-            return Ok(_notificationService.TGetAllNotificationByStatusFalse());
+            return Ok(_mapper.Map<List<ResultNotificationDto>>(_notificationService.TGetAllNotificationByStatusFalse()));
         }
         [HttpPost("CreateNotification")]
         public IActionResult CreateNotification(CreateNotificationDto createNotificationDto)
         {
-            Notification notification = new Notification()
-            {
-                Type = createNotificationDto.Type,
-                Icon = createNotificationDto.Icon,
-                Description = createNotificationDto.Description,
-                Date = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
-                Status = false
-            };
-            _notificationService.TAdd(notification);
+            createNotificationDto.Status = false;
+            createNotificationDto.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            var value = _mapper.Map<Notification>(createNotificationDto);
+            _notificationService.TAdd(value);
             return Ok("Bildirim Eklendi");
         }
         [HttpDelete("DeleteNotification/{id}")]
@@ -55,21 +53,13 @@ namespace WebServices.Controllers
         [HttpGet("GetNotification/{id}")]
         public IActionResult GetNotification(int id)
         {
-            return Ok(_notificationService.TGetByID(id));
+            return Ok(_mapper.Map<List<GetNotificationDto>>(_notificationService.TGetByID(id)));
         }
         [HttpPut("UpdateNotification/{id}")]
         public IActionResult UpdateNotification(UpdateNotificationDto updateNotificationDto)
         {
-            Notification notification = new Notification()
-            {
-                NotificationID = updateNotificationDto.NotificationID,
-                Type = updateNotificationDto.Type,
-                Icon = updateNotificationDto.Icon,
-                Description = updateNotificationDto.Description,
-                Date = updateNotificationDto.Date,
-                Status = updateNotificationDto.Status
-            };
-            _notificationService.TUpdate(notification);
+            var value = _mapper.Map<Notification>(updateNotificationDto);
+            _notificationService.TUpdate(value);
             return Ok("Bildirim Güncellendi");
         }
         [HttpGet("UpdateNotificationStatus/{id}")]

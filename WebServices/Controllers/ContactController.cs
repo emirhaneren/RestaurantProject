@@ -26,13 +26,8 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateContact(CreateContactDto createContactDto)
         {
-            _contactService.TAdd(new Contact()
-            {
-                FooterDescription = createContactDto.FooterDescription,
-                Location = createContactDto.Location,
-                Mail = createContactDto.Mail,
-                PhoneNumber = createContactDto.PhoneNumber,
-            });
+            var value = _mapper.Map<Contact>(createContactDto);
+            _contactService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
         }
         [HttpDelete("{id}")]
@@ -45,21 +40,15 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateContact(UpdateContactDto updateContactDto)
         {
-            _contactService.TUpdate(new Contact()
-            {
-                ContactID = updateContactDto.ContactID,
-                FooterDescription = updateContactDto.FooterDescription,
-                Location = updateContactDto.Location,
-                Mail = updateContactDto.Mail,
-                PhoneNumber = updateContactDto.PhoneNumber,
-            });
+            var value = _mapper.Map<Contact>(updateContactDto);
+            _contactService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");
         }
         [HttpGet("GetContactById/{id}")]
         public IActionResult GetContact(int id)
         {
             var value = _contactService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetContactDto>(value));
         }
     }
 }

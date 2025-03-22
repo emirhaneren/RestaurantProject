@@ -26,14 +26,9 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
-            _discountService.TAdd(new Discount()
-            {
-                Amount = createDiscountDto.Amount,
-                DiscountDescription = createDiscountDto.DiscountDescription,
-                DiscountTitle = createDiscountDto.DiscountTitle,
-                ImageUrl = createDiscountDto.ImageUrl,
-                Status = false
-            });
+            createDiscountDto.Status = false;
+            var value =_mapper.Map<Discount>(createDiscountDto);
+            _discountService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
         }
         [HttpDelete("{id}")]
@@ -46,22 +41,15 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
-            _discountService.TUpdate(new Discount()
-            {
-                DiscountID = updateDiscountDto.DiscountID,
-                Amount = updateDiscountDto.Amount,
-                DiscountDescription = updateDiscountDto.DiscountDescription,
-                DiscountTitle = updateDiscountDto.DiscountTitle,
-                ImageUrl = updateDiscountDto.ImageUrl,
-                Status = updateDiscountDto.Status
-            });
+            var value =_mapper.Map<Discount>(updateDiscountDto);
+            _discountService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");
         }
         [HttpGet("GetDiscountById/{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
-            return Ok(value);
+            return Ok(_mapper.Map<GetDiscountDto>(value));
         }
         [HttpGet("ChangeStatus/{id}")]
         public IActionResult ChangeStatus(int id)
