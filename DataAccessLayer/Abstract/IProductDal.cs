@@ -12,5 +12,6 @@ namespace DataAccessLayer.Abstract
         string ProductNameByMinPrice();
         string ProductNameByMaxPrice();
         decimal ProductPriceByHamburger();
+        List<Product> GetLast9Products();
     }
 }

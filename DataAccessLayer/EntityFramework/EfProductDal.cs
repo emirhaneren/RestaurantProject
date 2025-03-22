@@ -12,6 +12,13 @@ namespace DataAccessLayer.EntityFramework
         {
         }
 
+        public List<Product> GetLast9Products()
+        {
+            var context= new Context();
+            var values = context.Products.OrderByDescending(x=>x.ProductID).Take(9).ToList();
+            return values;
+        }
+
         public List<Product> GetProductsWithCategories()
         {
             var context = new Context();

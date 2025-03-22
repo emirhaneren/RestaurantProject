@@ -29,7 +29,7 @@ namespace WebServices.Controllers
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
             createProductDto.ProductStatus = true;
-            var value =_mapper.Map<Product>(createProductDto);
+            var value = _mapper.Map<Product>(createProductDto);
             _productService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
         }
@@ -102,6 +102,11 @@ namespace WebServices.Controllers
         public IActionResult ProductPriceByHamburger()
         {
             return Ok(_productService.TProductPriceByHamburger());
+        }
+        [HttpGet("GetLast9Products")]
+        public IActionResult GetLast9Products()
+        {
+            return Ok(_mapper.Map<List<ResultProductDto>>(_productService.TGetLast9Products()));
         }
     }
 }
