@@ -13,8 +13,8 @@ namespace BusinessLayer.ValidationRules.BookingValidations
             RuleFor(x => x.PersonCount).NotEmpty().WithMessage("Kişi sayısı boş geçilemez !");
             RuleFor(x => x.Date).NotEmpty().WithMessage("Tarih alanı boş geçilemez !");
 
-            RuleFor(x => x.Name).MinimumLength(3).WithMessage("Litfen alanına en az 3 karakter olacak şekilde giriniz !");
-            RuleFor(x => x.Name).MaximumLength(50).WithMessage("Litfen alanına en fazla 50 karakter olacak şekilde giriniz !");
+            RuleFor(x => x.Name).MinimumLength(3).WithMessage("Lütfen isim alanına en az 3 karakter olacak şekilde giriniz !");
+            RuleFor(x => x.Name).MaximumLength(50).WithMessage("Litfen isim alanına en fazla 50 karakter olacak şekilde giriniz !");
 
             RuleFor(x => x.Mail).EmailAddress().WithMessage("Lütfen geçerli bir email adresi giriniz !");
 

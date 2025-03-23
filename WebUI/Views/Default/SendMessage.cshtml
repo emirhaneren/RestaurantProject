@@ -12,18 +12,23 @@
                     <form method="post" asp-action="SendMessage" asp-controller="Default">
                         <div>
                             <input type="text" class="form-control" placeholder="İsim & Soyisim" asp-for="NameSurname"/>
+                            <span asp-validation-for="NameSurname" class="text-danger"></span>
                         </div>
                         <div>
                             <input type="text" class="form-control" placeholder="Telefon Numaranız" asp-for="PhoneNumber" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         <div>
                             <input type="email" class="form-control" placeholder="e-Posta Adresiniz" asp-for="Mail" />
+                            <span asp-validation-for="Mail" class="text-danger"></span>
                         </div>
                         <div>
                             <input type="text" class="form-control" placeholder="Konu" asp-for="Subject" />
+                            <span asp-validation-for="Subject" class="text-danger"></span>
                         </div>
                         <div>
                             <textarea asp-for="MessageContent" rows="10" placeholder="Mesajınız..." class="form-control"></textarea>
+                            <span asp-validation-for="MessageContent" class="text-danger"></span>
                         </div>
                         <div class="btn_box">
                             <button>

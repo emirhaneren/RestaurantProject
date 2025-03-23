@@ -4,6 +4,7 @@ using BusinessLayer.ValidationRules.BookingValidations;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DtoLayer.MessageDto;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using System.Reflection;
@@ -67,6 +68,7 @@ builder.Services.AddFluentValidationAutoValidation(config =>
     config.DisableDataAnnotationsValidation = true;
 });
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateMessageDto>();
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

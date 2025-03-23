@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DtoLayer.MessageDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,10 +14,12 @@ namespace WebServices.Controllers
     {
         private readonly IMessageService _messageService;
         private readonly IMapper _mapper;
-        public MessageController(IMessageService messageService, IMapper mapper)
+        private readonly IValidator<CreateMessageDto> _validator;
+        public MessageController(IMessageService messageService, IMapper mapper, IValidator<CreateMessageDto> validator)
         {
             _messageService = messageService;
             _mapper = mapper;
+            _validator = validator;
         }
         [HttpGet]
         public IActionResult MessageList()
@@ -28,6 +31,13 @@ namespace WebServices.Controllers
         {
             createMessageDto.Status = false;
             createMessageDto.SendDate = DateTime.Now;
+
+            var validationResult = _validator.Validate(createMessageDto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
+
             var value = _mapper.Map<Message>(createMessageDto);
             _messageService.TAdd(value);
             return Ok("Başarılı şekilde eklendi.");

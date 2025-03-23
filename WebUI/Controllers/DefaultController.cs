@@ -6,6 +6,7 @@ using System.Text;
 using WebUI.Constants;
 using WebUI.Dtos.ContactDtos;
 using WebUI.Dtos.MessageDtos;
+using WebUI.Dtos.ValidationDtos;
 
 namespace WebUI.Controllers
 {
@@ -40,7 +41,22 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction("Index", "Default");
             }
-            return View();
+            else
+            {
+                ModelState.Clear();
+                var errorResponse = await responseMsg.Content.ReadFromJsonAsync<ApiValidationErrorResponseDto>();
+                if (errorResponse?.Errors != null)
+                {
+                    foreach (var error in errorResponse.Errors)
+                    {
+                        foreach (var errorMessage in error.Value)
+                        {
+                            ModelState.AddModelError(error.Key, errorMessage);
+                        }
+                    }
+                }
+                return View("Index");
+            }
         }
     }
 }
