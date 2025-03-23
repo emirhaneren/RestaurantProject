@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Text;
 using WebUI.Constants;
 using WebUI.Dtos.AboutDtos;
+using WebUI.Dtos.ValidationDtos;
 using WebUI.Helpers;
 
 namespace WebUI.Controllers
@@ -44,7 +45,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            updateAboutDto.ImageUrl = "---";
+            updateAboutDto.ImageUrl = "/uiAssets/images/about-img.png";
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateAboutDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, GeneralConstants.appJson);
@@ -53,7 +54,22 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                ModelState.Clear();
+                var errorResponse = await responseMsg.Content.ReadFromJsonAsync<ApiValidationErrorResponseDto>();
+                if (errorResponse?.Errors != null)
+                {
+                    foreach (var error in errorResponse.Errors)
+                    {
+                        foreach (var errorMessage in error.Value)
+                        {
+                            ModelState.AddModelError(error.Key, errorMessage);
+                        }
+                    }
+                }
+                return View(updateAboutDto);
+            }
         }
     }
 }

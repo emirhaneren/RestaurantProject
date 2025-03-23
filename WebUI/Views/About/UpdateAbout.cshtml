@@ -18,10 +18,12 @@
                             <div class="form-group">
                                 <label for="title">Hakkımda Alanının Başlığını Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Title" id="title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label for="description">Hakkımda Alanının Açıklamasını Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Description" id="description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-action">

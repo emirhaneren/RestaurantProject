@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DtoLayer.AboutDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -12,10 +13,12 @@ namespace WebServices.Controllers
     {
         private readonly IAboutService _aboutService;
         private readonly IMapper _mapper;
-        public AboutController(IAboutService aboutService, IMapper mapper)
+        private readonly IValidator<UpdateAboutDto> _validator;
+        public AboutController(IAboutService aboutService, IMapper mapper, IValidator<UpdateAboutDto> validator)
         {
             _aboutService = aboutService;
             _mapper = mapper;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -41,6 +44,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
+            var validationResult = _validator.Validate(updateAboutDto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors);
+            }
             var value = _mapper.Map<About>(updateAboutDto);
             _aboutService.TUpdate(value);
             return Ok("Başarılı şekilde güncellendi.");
