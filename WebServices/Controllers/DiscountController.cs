@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DtoLayer.DiscountDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -12,10 +13,14 @@ namespace WebServices.Controllers
     {
         private readonly IDiscountService _discountService;
         private readonly IMapper _mapper;
-        public DiscountController(IDiscountService discountService, IMapper mapper)
+        private readonly IValidator<CreateDiscountDto> _validator;
+        private readonly IValidator<UpdateDiscountDto> _validator2;
+        public DiscountController(IDiscountService discountService, IMapper mapper, IValidator<UpdateDiscountDto> validator2, IValidator<CreateDiscountDto> validator)
         {
             _discountService = discountService;
             _mapper = mapper;
+            _validator2 = validator2;
+            _validator = validator;
         }
         [HttpGet]
         public IActionResult DiscountList()
@@ -27,6 +32,11 @@ namespace WebServices.Controllers
         public IActionResult CreateDiscount(CreateDiscountDto createDiscountDto)
         {
             createDiscountDto.Status = false;
+            var validation = _validator.Validate(createDiscountDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value =_mapper.Map<Discount>(createDiscountDto);
             _discountService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
@@ -41,6 +51,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateDiscount(UpdateDiscountDto updateDiscountDto)
         {
+            var validation = _validator2.Validate(updateDiscountDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value =_mapper.Map<Discount>(updateDiscountDto);
             _discountService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");

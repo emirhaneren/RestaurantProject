@@ -2,6 +2,7 @@
 using BusinessLayer.Abstract;
 using DtoLayer.TestimonialDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -12,10 +13,14 @@ namespace WebServices.Controllers
     {
         private readonly ITestimonialService _testimonialService;
         private readonly IMapper _mapper;
-        public TestimonialController(ITestimonialService estimonialService, IMapper mapper)
+        private readonly IValidator<CreateTestimonialDto> _validator;
+        private readonly IValidator<UpdateTestimonialDto> _validator2;
+        public TestimonialController(ITestimonialService estimonialService, IMapper mapper, IValidator<UpdateTestimonialDto> validator2, IValidator<CreateTestimonialDto> validator)
         {
             _testimonialService = estimonialService;
             _mapper = mapper;
+            _validator2 = validator2;
+            _validator = validator;
         }
         [HttpGet]
         public IActionResult TestimonialList()
@@ -27,6 +32,11 @@ namespace WebServices.Controllers
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
             createTestimonialDto.Status = true;
+            var validation = _validator.Validate(createTestimonialDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Testimonial>(createTestimonialDto);
             _testimonialService.TAdd(value);
             return Ok("Başarılı bir şekilde oluşturuldu");
@@ -41,6 +51,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
+            var validation = _validator2.Validate(updateTestimonialDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Testimonial>(updateTestimonialDto);
             _testimonialService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");

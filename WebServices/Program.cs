@@ -5,7 +5,15 @@ using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using DtoLayer.AboutDto;
+using DtoLayer.CategoryDto;
+using DtoLayer.ContactDto;
+using DtoLayer.DiscountDto;
+using DtoLayer.MenuTableDto;
 using DtoLayer.MessageDto;
+using DtoLayer.ProductDto;
+using DtoLayer.SliderDto;
+using DtoLayer.SocialMediaDto;
+using DtoLayer.TestimonialDto;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using System.Reflection;
@@ -71,6 +79,21 @@ builder.Services.AddFluentValidationAutoValidation(config =>
 builder.Services.AddValidatorsFromAssemblyContaining<CreateBookingValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateMessageDto>();
 builder.Services.AddValidatorsFromAssemblyContaining<UpdateAboutDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateCategoryDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateCategoryDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateProductDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateProductDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateDiscountDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateDiscountDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateContactDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateSliderDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateSliderDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTestimonialDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTestimonialDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateSocialMediaDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateSocialMediaDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<CreateMenuTableDto>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateMenuTableDto>();
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

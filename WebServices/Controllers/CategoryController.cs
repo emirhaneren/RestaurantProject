@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using BusinessLayer.Abstract;
+using DtoLayer.BookingDto;
 using DtoLayer.CategoryDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -12,10 +14,14 @@ namespace WebServices.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
-        public CategoryController(ICategoryService categoryService, IMapper mapper)
+        private readonly IValidator<CreateCategoryDto> _validator;
+        private readonly IValidator<UpdateCategoryDto> _validator2;
+        public CategoryController(ICategoryService categoryService, IMapper mapper, IValidator<CreateCategoryDto> validator, IValidator<UpdateCategoryDto> validator2)
         {
             _categoryService = categoryService;
             _mapper = mapper;
+            _validator = validator;
+            _validator2 = validator2;
         }
 
         [HttpGet]
@@ -28,6 +34,11 @@ namespace WebServices.Controllers
         public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
             createCategoryDto.CategoryStatus = true;
+            var validation=_validator.Validate(createCategoryDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Category>(createCategoryDto);
             _categoryService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi.");
@@ -42,6 +53,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
         {
+            var validation = _validator2.Validate(updateCategoryDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Category>(updateCategoryDto);
             _categoryService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");

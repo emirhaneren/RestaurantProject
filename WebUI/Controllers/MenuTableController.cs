@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Text;
 using WebUI.Constants;
 using WebUI.Dtos.MenuTableDtos;
+using WebUI.Dtos.ValidationDtos;
 using WebUI.Helpers;
 
 namespace WebUI.Controllers
@@ -45,7 +46,22 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                ModelState.Clear();
+                var errorResponse = await responseMsg.Content.ReadFromJsonAsync<ApiValidationErrorResponseDto>();
+                if (errorResponse?.Errors != null)
+                {
+                    foreach (var error in errorResponse.Errors)
+                    {
+                        foreach (var errorMessage in error.Value)
+                        {
+                            ModelState.AddModelError(error.Key, errorMessage);
+                        }
+                    }
+                }
+            }
+            return View(createMenuTableDto);
         }
         public async Task<IActionResult> DeleteMenuTable(int id)
         {
@@ -82,7 +98,22 @@ namespace WebUI.Controllers
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                ModelState.Clear();
+                var errorResponse = await responseMsg.Content.ReadFromJsonAsync<ApiValidationErrorResponseDto>();
+                if (errorResponse?.Errors != null)
+                {
+                    foreach (var error in errorResponse.Errors)
+                    {
+                        foreach (var errorMessage in error.Value)
+                        {
+                            ModelState.AddModelError(error.Key, errorMessage);
+                        }
+                    }
+                }
+            }
+            return View(updateMenuTableDto);
         }
         [HttpGet]
         public async Task<IActionResult> TableListByStatus()

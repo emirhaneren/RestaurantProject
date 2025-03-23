@@ -18,24 +18,28 @@
                             <div class="form-group">
                                 <label for="name">Referans Adını Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Name" id="name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="title">Referans Ünvanı Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Title" id="title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="imageUrl">Referans Fotoğraf Yolunu Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="ImageUrl" id="imageUrl">
+                                <span asp-validation-for="ImageUrl" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="comment">Referans Yorumunu Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Comment" id="comment">
+                                <span asp-validation-for="Comment" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-action">

@@ -18,18 +18,21 @@
                             <div class="form-group">
                                 <label for="productName">Ürün Adını Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="ProductName" id="productName">
+                                <span asp-validation-for="ProductName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="price">Ürün Fiyatını Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Price" id="price">
+                                <span asp-validation-for="Price" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="imageUrl">Ürün Görselini Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="ImageUrl" id="imageUrl">
+                                <span asp-validation-for="ImageUrl" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">

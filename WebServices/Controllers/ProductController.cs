@@ -3,6 +3,7 @@ using BusinessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DtoLayer.ProductDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ namespace WebServices.Controllers
     {
         private readonly IProductService _productService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateProductDto> _validator;
+        private readonly IValidator<UpdateProductDto> _validator2;
         public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
@@ -29,6 +32,11 @@ namespace WebServices.Controllers
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
             createProductDto.ProductStatus = true;
+            var validation = _validator.Validate(createProductDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Product>(createProductDto);
             _productService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
@@ -43,6 +51,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
+            var validation = _validator2.Validate(updateProductDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Product>(updateProductDto);
             _productService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");

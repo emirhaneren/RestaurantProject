@@ -17,18 +17,21 @@
                             <div class="form-group">
                                 <label for="title">Başlık Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Title" id="title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="url">URL Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Url" id="url">
+                                <span asp-validation-for="Url" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="icon">Icon Giriniz :</label>
                                 <input type="text" class="form-control" asp-for="Icon" id="icon">
+                                <span asp-validation-for="Icon" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-action">

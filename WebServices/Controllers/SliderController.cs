@@ -2,7 +2,9 @@
 using BusinessLayer.Abstract;
 using DtoLayer.SliderDto;
 using EntityLayer.Entities;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace WebServices.Controllers
 {
@@ -12,6 +14,8 @@ namespace WebServices.Controllers
     {
         private readonly ISliderService _sliderService;
         private readonly IMapper _mapper;
+        private readonly IValidator<CreateSliderDto> _validator;
+        private readonly IValidator<UpdateSliderDto> _validator2;
         public SliderController(ISliderService sliderService, IMapper mapper)
         {
             _sliderService = sliderService;
@@ -26,6 +30,11 @@ namespace WebServices.Controllers
         [HttpPost]
         public IActionResult CreateSlider(CreateSliderDto createSliderDto)
         {
+            var validation = _validator.Validate(createSliderDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value =_mapper.Map<Slider>(createSliderDto);
             _sliderService.TAdd(value);
             return Ok("Başarılı bir şekilde eklendi");
@@ -40,6 +49,11 @@ namespace WebServices.Controllers
         [HttpPut]
         public IActionResult UpdateFeature(UpdateSliderDto updateSliderDto)
         {
+            var validation = _validator2.Validate(updateSliderDto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            }
             var value = _mapper.Map<Slider>(updateSliderDto);
             _sliderService.TUpdate(value);
             return Ok("Başarılı bir şekilde güncellendi");
