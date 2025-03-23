@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EntityLayer.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using WebUI.Constants;
@@ -17,10 +18,16 @@ namespace WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index(int id)
         {
+            if (id == 0)
+            {
+                ViewBag.ErrorMessage = "Geçersiz masa numarası!";
+                return View(new List<ResultBasketDto>());
+            }
+            ViewBag.MenuTableId = id;
             var client = _httpClientFactory.CreateClient();
-            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.basketGetByProductNameApi, 5));
+            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.basketGetByProductNameApi, id));
             if (responseMsg.IsSuccessStatusCode)
             {
                 var jsonData = await responseMsg.Content.ReadAsStringAsync();
@@ -29,15 +36,22 @@ namespace WebUI.Controllers
             }
             return View();
         }
-         public async Task<IActionResult> DeleteBasket(int id)
+         public async Task<IActionResult> DeleteBasket(int id,int tableId)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMsg = await client.DeleteAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.basketApi, id));
+
             if (responseMsg.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = tableId });
             }
             return NoContent();
+        }
+        public async Task<IActionResult> ChangeMenuTable(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMsg = await client.GetAsync(ApiHelper.ConfigureApiUrl(WebServiceAdresses.menuTableIdFalseApi, id));
+            return RedirectToAction("CustomerTableList", "CustomerTable");
         }
     }
 }

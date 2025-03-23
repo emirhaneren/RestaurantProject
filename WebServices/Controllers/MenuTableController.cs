@@ -71,5 +71,17 @@ namespace WebServices.Controllers
         {
             return Ok(_mapper.Map<GetMenuTableDto>(_menuTableService.TGetByID(id)));
         }
+        [HttpGet("ChangeMenuTableStatusToTrue/{id}")]
+        public IActionResult ChangeMenuTableStatusToTrue(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusToTrue(id);
+            return Ok("Masa durumu true yapıldı.");
+        }
+        [HttpGet("ChangeMenuTableStatusToFalse/{id}")]
+        public IActionResult ChangeMenuTableStatusToFalse(int id)
+        {
+            _menuTableService.TChangeMenuTableStatusToFalse(id);
+            return Ok("Masa durumu false yapıldı.");
+        }
     }
 }
