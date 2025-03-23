@@ -49,16 +49,6 @@
     </div>
     <nav class="navbar navbar-header navbar-expand-lg">
         <div class="container-fluid">
-            <form class="navbar-left navbar-form nav-search mr-md-3" action="">
-                <div class="input-group">
-                    <input type="text" placeholder="Aranacak Kelime...." class="form-control">
-                    <div class="input-group-append">
-                        <span class="input-group-text">
-                            <i class="la la-search search-icon"></i>
-                        </span>
-                    </div>
-                </div>
-            </form>
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <li class="nav-item dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,9 +56,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Gelen Mesajlar</a>
-                        <a class="dropdown-item" href="#">Rezervasyonlar</a>
+                        <a class="dropdown-item" href="/Booking/Index/">Rezervasyonlar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">İletişim</a>
+                        <a class="dropdown-item" href="/Contact/Index/">İletişim</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown hidden-caret">
@@ -87,12 +77,12 @@
                             </div>
                         </li>
                         <li>
-                            <a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>
+                            <a class="see-all" href="/Notification/Index/"> <strong>Tüm Bildirimler</strong> <i class="la la-angle-right"></i> </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="~/adminAssets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span>Hizrian</span></span> </a>
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="~/adminAssets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span>Admin</span></span> </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
                             <div class="user-box">
@@ -104,15 +94,14 @@
                             </div>
                         </li>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="ti-user"></i> Menü</a>
-                        <a class="dropdown-item" href="#"> Ayarlar</a>
-                        <a class="dropdown-item" href="#"><i class="ti-email"></i> Rezervasyonlar</a>
+                        <a class="dropdown-item" href="/Menu/Index/"><i class="ti-user"></i> Menü</a>
+                        <a class="dropdown-item" href="/Settings/Index/"> Ayarlar</a>
+                        <a class="dropdown-item" href="/Booking/Index/"><i class="ti-email"></i> Rezervasyonlar</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="ti-settings"></i> Dashboard</a>
+                        <a class="dropdown-item" href="/Statistic/Index/"><i class="ti-settings"></i> Dashboard</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Çıkış Yap</a>
+                        <a class="dropdown-item" href="/Login/LogOut/"><i class="fa fa-power-off"></i> Çıkış Yap</a>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
             </ul>
         </div>
