@@ -1,0 +1,44 @@
+﻿@model WebUI.Dtos.MessageDtos.GetMessageDto
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Gelen Mesaj İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <div class="container-fluid">
+                        <h4 class="page-title">Gelen Mesaj Detayı</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <strong>Ad Soyad:</strong> @Model.NameSurname
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Email:</strong> @Model.Mail
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Telefon:</strong> @Model.PhoneNumber
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Konu:</strong> @Model.Subject
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Mesaj:</strong>
+                                    <div class="border p-2 bg-light rounded">
+                                        @Model.MessageContent
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Gönderim Tarihi:</strong> @Model.SendDate.ToString("dd.MM.yyyy HH:mm")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

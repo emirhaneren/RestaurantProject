@@ -62,7 +62,7 @@ namespace WebUI.Constants
 
 
         public static readonly string messageApi= "https://localhost:7034/api/Message";
-        public static readonly string messageIdApi= "https://localhost:7034/api/Message/{id}";
+        public static readonly string messageIdApi= "https://localhost:7034/api/Message/Get/{id}";
 
     }
 }

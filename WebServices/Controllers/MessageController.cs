@@ -56,7 +56,7 @@ namespace WebServices.Controllers
             _messageService.TUpdate(value);
             return Ok("Başarılı şekilde güncellendi.");
         }
-        [HttpGet("{id}")]
+        [HttpGet("Get/{id}")]
         public IActionResult GetMessage(int id)
         {
             return Ok(_mapper.Map<GetMessageDto>(_messageService.TGetByID(id)));

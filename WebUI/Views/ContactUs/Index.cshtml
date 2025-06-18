@@ -1,0 +1,46 @@
+﻿@model List<WebUI.Dtos.MessageDtos.ResultMessageDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Gelen Mesaj Listesi İşlemleri</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Gelen Mesaj Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Gelen Mesajlar ile ilgili işlemleri aşağıdan gerçekleştirebilirsiniz :
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">İsim-Soyisim</th>
+                                    <th scope="col">Mail</th>
+                                    <th scope="col">Konu</th>
+                                    <th scope="col">Detay</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.Mail</td>
+                                        <td>@item.Subject</td>
+                                        <td><a href="/ContactUs/GetMessage/@item.MessageID" class="btn btn-outline-warning">Güncelle</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
